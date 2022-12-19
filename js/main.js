@@ -116,6 +116,7 @@
 			}
 		},
 	});
+	
 	$("#pause_play").click(function(e){
 		e.preventDefault();
 		if($(this).hasClass("play")){
@@ -268,11 +269,16 @@
 				winT=$(window).scrollTop();
 
 				if(winT < $("#page1").offset().top - winH/2){
+					$("index").addClass("active");
+				}
+				else if(winT < $("#page2").offset().top - winH/2){
 					$("#page1").addClass("active");
 				}
 			}, 25);	
 		}
 	});
+
+	$(window).trigger("scroll");
 
 	$(window).resize(function(){
 		clearTimeout(timer);
@@ -307,5 +313,4 @@
 	});
 
 	$(window).trigger("resize");
-
 });
