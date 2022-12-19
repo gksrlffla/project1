@@ -1,9 +1,11 @@
 ﻿$(function(){
 	if(!isMobile){
-		$("body").addClass("fixed");   
+		$("body").addClass("fixed");
 	}
 
 	let winW;
+	let winT;
+	let winH;
 	let deviceStatus="";
 
 	$("#gnb > ul").hover(
@@ -256,9 +258,25 @@
 		}
 	});
 
+	$(window).scroll(function(){
+		winT=$(window).scrollTop();
+
+		if(isMobile == true){
+			clearTimeout(timer);
+
+			timer=setTimeout(function(){
+				winT=$(window).scrollTop();
+
+				if(winT < $("#page1").offset().top - winH/2){
+					$("#page1").addClass("active");
+				}
+			}, 25);	
+		}
+	});
+
 	$(window).resize(function(){
 		clearTimeout(timer);
-		
+		winH=$(window).height();
 		winW=window.innerWidth;
 		if(winW > 1024){
 			deviceStatus="pc";
@@ -288,6 +306,6 @@
 		}, 100);
 	});
 
-	$(window).trigger("resize")
+	$(window).trigger("resize");
 
 });
